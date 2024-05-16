@@ -1,28 +1,18 @@
-import Field from "./model/Field";
 import { parseCron } from "./parser/cronParser";
+import { parseInput } from "./parser/inputParser";
 import { writeToConsole } from "./writer/consoleWriter";
 
-
 /* 
-
 execution flow:
     index.ts
+        - inputParser
         - cronParser
            - exprParser
                 - fieldParser
         - writer
 */
-
 (function () {
-    const args = process.argv;
-    const input = args[2];
-    if (!input) {
-        throw new Error('Invalid input');
-    }
-    const lastSpaceIndex = input.lastIndexOf(' ');
-    const cronExpression = input.slice(0, lastSpaceIndex).trim();
-    const command = input.slice(lastSpaceIndex + 1).trim();
-
+    const [cronExpression, command] = parseInput();
     const parsedFields = parseCron(cronExpression);
     writeToConsole(parsedFields, command);
 })();
