@@ -7,7 +7,7 @@ function parseField(field: Field): Field {
         if (parser.pattern.test(field.pattern)) {
             return {
                 ...field,
-                values: parser.parserFn(field)
+                sequence: parser.parserFn(field)
             }
         }
     }

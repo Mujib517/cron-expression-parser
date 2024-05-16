@@ -6,11 +6,11 @@ describe('index', () => {
         {
             expr: '30 12 1 2 3',
             expected: [
-                { name: 'Minute', values: [30] },
-                { name: 'Hour', values: [12] },
-                { name: 'Day', values: [1] },
-                { name: 'Month', values: [2] },
-                { name: 'Week Day', values: [3] }
+                { name: 'Minute', sequence: [30] },
+                { name: 'Hour', sequence: [12] },
+                { name: 'Day', sequence: [1] },
+                { name: 'Month', sequence: [2] },
+                { name: 'Week Day', sequence: [3] }
             ]
         },
 
@@ -18,11 +18,11 @@ describe('index', () => {
         {
             expr: '30 12 1 2 *',
             expected: [
-                { name: 'Minute', values: [30] },
-                { name: 'Hour', values: [12] },
-                { name: 'Day', values: [1] },
-                { name: 'Month', values: [2] },
-                { name: 'Week Day', values: [1, 2, 3, 4, 5, 6, 7] }
+                { name: 'Minute', sequence: [30] },
+                { name: 'Hour', sequence: [12] },
+                { name: 'Day', sequence: [1] },
+                { name: 'Month', sequence: [2] },
+                { name: 'Week Day', sequence: [1, 2, 3, 4, 5, 6, 7] }
             ]
         },
 
@@ -30,11 +30,11 @@ describe('index', () => {
         {
             expr: '30 12 1 * *',
             expected: [
-                { name: 'Minute', values: [30] },
-                { name: 'Hour', values: [12] },
-                { name: 'Day', values: [1] },
-                { name: 'Month', values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-                { name: 'Week Day', values: [1, 2, 3, 4, 5, 6, 7] }
+                { name: 'Minute', sequence: [30] },
+                { name: 'Hour', sequence: [12] },
+                { name: 'Day', sequence: [1] },
+                { name: 'Month', sequence: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+                { name: 'Week Day', sequence: [1, 2, 3, 4, 5, 6, 7] }
             ]
         },
 
@@ -42,11 +42,11 @@ describe('index', () => {
         {
             expr: '*/15 0 1,15 * *',
             expected: [
-                { name: 'Minute', values: [0, 15, 30, 45] },
-                { name: 'Hour', values: [0] },
-                { name: 'Day', values: [1, 15] },
-                { name: 'Month', values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
-                { name: 'Week Day', values: [1, 2, 3, 4, 5, 6, 7] }
+                { name: 'Minute', sequence: [0, 15, 30, 45] },
+                { name: 'Hour', sequence: [0] },
+                { name: 'Day', sequence: [1, 15] },
+                { name: 'Month', sequence: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+                { name: 'Week Day', sequence: [1, 2, 3, 4, 5, 6, 7] }
             ]
         },
 
@@ -54,11 +54,11 @@ describe('index', () => {
         {
             expr: '0 0 1 */2 *',
             expected: [
-                { name: 'Minute', values: [0] },
-                { name: 'Hour', values: [0] },
-                { name: 'Day', values: [1] },
-                { name: 'Month', values: [1, 3, 5, 7, 9, 11] },
-                { name: 'Week Day', values: [1, 2, 3, 4, 5, 6, 7] }
+                { name: 'Minute', sequence: [0] },
+                { name: 'Hour', sequence: [0] },
+                { name: 'Day', sequence: [1] },
+                { name: 'Month', sequence: [1, 3, 5, 7, 9, 11] },
+                { name: 'Week Day', sequence: [1, 2, 3, 4, 5, 6, 7] }
             ]
         },
 
@@ -66,11 +66,11 @@ describe('index', () => {
         {
             expr: '0 9-17 * * 1-5',
             expected: [
-                { name: 'Minute', values: [0] },
-                { name: 'Hour', values: [9, 10, 11, 12, 13, 14, 15, 16, 17] },
-                { name: 'Day', values: fillArray(31) },
-                { name: 'Month', values: fillArray(12) },
-                { name: 'Week Day', values: fillArray(5) }
+                { name: 'Minute', sequence: [0] },
+                { name: 'Hour', sequence: [9, 10, 11, 12, 13, 14, 15, 16, 17] },
+                { name: 'Day', sequence: fillArray(31) },
+                { name: 'Month', sequence: fillArray(12) },
+                { name: 'Week Day', sequence: fillArray(5) }
             ]
         },
 
@@ -78,11 +78,11 @@ describe('index', () => {
         {
             expr: '0 0 1 * 1-5',
             expected: [
-                { name: 'Minute', values: [0] },
-                { name: 'Hour', values: [0] },
-                { name: 'Day', values: [1] },
-                { name: 'Month', values: fillArray(12) },
-                { name: 'Week Day', values: fillArray(5) }
+                { name: 'Minute', sequence: [0] },
+                { name: 'Hour', sequence: [0] },
+                { name: 'Day', sequence: [1] },
+                { name: 'Month', sequence: fillArray(12) },
+                { name: 'Week Day', sequence: fillArray(5) }
             ]
         },
 
@@ -90,11 +90,11 @@ describe('index', () => {
         {
             expr: '*/15 0 1,15 * 1-5',
             expected: [
-                { name: 'Minute', values: [0, 15, 30, 45] },
-                { name: 'Hour', values: [0] },
-                { name: 'Day', values: [1, 15] },
-                { name: 'Month', values: fillArray(12) },
-                { name: 'Week Day', values: fillArray(5) }
+                { name: 'Minute', sequence: [0, 15, 30, 45] },
+                { name: 'Hour', sequence: [0] },
+                { name: 'Day', sequence: [1, 15] },
+                { name: 'Month', sequence: fillArray(12) },
+                { name: 'Week Day', sequence: fillArray(5) }
             ]
         }
     ];
@@ -107,7 +107,7 @@ describe('index', () => {
         const transformedResult = result.map(item => {
             return {
                 name: item.name,
-                values: item.values
+                sequence: item.sequence
             };
         });
 

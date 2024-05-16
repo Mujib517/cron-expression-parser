@@ -18,7 +18,7 @@ describe('field parser', () => {
         const minField = { name: 'Minute', min: 0, max: 59, pattern: '15' };
         const fields: Field[] = [minField];
 
-        const expected = [{ ...minField, values: [15] }];
+        const expected = [{ ...minField, sequence: [15] }];
         expect(parseFields(fields)).toEqual(expected);
     });
 
@@ -26,7 +26,7 @@ describe('field parser', () => {
         const weekDayField = { name: 'Week Day', min: 1, max: 7, pattern: '*' };
         const fields: Field[] = [weekDayField];
 
-        const expected = [{ ...weekDayField, values: [1, 2, 3, 4, 5, 6, 7] }]
+        const expected = [{ ...weekDayField, sequence: [1, 2, 3, 4, 5, 6, 7] }]
         expect(parseFields(fields)).toEqual(expected);
     });
 
@@ -35,7 +35,7 @@ describe('field parser', () => {
             const listField = { name: 'Minute', min: 0, max: 59, pattern: '15,30,45' };
             const fields: Field[] = [listField];
 
-            const expected = [{ ...listField, values: [15, 30, 45] }];
+            const expected = [{ ...listField, sequence: [15, 30, 45] }];
             expect(parseFields(fields)).toEqual(expected);
         });
 
@@ -52,7 +52,7 @@ describe('field parser', () => {
             const rangeField = { name: 'Minute', min: 0, max: 59, pattern: '15-20' };
             const fields: Field[] = [rangeField];
 
-            const expected = [{ ...rangeField, values: [15, 16, 17, 18, 19, 20] }];
+            const expected = [{ ...rangeField, sequence: [15, 16, 17, 18, 19, 20] }];
             expect(parseFields(fields)).toEqual(expected);
         });
 
@@ -68,7 +68,7 @@ describe('field parser', () => {
             const stepField = { name: 'Minute', min: 0, max: 59, pattern: '*/15' };
             const fields: Field[] = [stepField];
 
-            const expected = [{ ...stepField, values: [0, 15, 30, 45] }];
+            const expected = [{ ...stepField, sequence: [0, 15, 30, 45] }];
             expect(parseFields(fields)).toEqual(expected);
         });
     });

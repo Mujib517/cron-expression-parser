@@ -3,7 +3,7 @@ type Field = {
     min: number;
     max: number;
     pattern?: string;
-    values?: number[],
+    sequence?: number[],
 };
 
 export default Field;
