@@ -1,4 +1,4 @@
-import { processCron } from "../../src/parser/cronParser";
+import { parseCron } from "../../src/parser/cronParser";
 
 describe('index', () => {
     const input = [
@@ -102,8 +102,7 @@ describe('index', () => {
     const invalidInput = ['* * *', '1 2 * 3 * 4 *'];
 
     it.each(input)('should parse cron expressions correctly', (testInput) => {
-        console.log('input', testInput.expr);
-        const result = processCron(testInput.expr);
+        const result = parseCron(testInput.expr);
         const transformedResult = result.map(item => {
             return {
                 name: item.name,
@@ -115,7 +114,7 @@ describe('index', () => {
     });
 
     it.each(invalidInput)('should throw an error if the cron expression is invalid', (inputExpr) => {
-        expect(() => processCron(inputExpr)).toThrow('Invalid cron');
+        expect(() => parseCron(inputExpr)).toThrow('Invalid cron');
     });
 });
 

@@ -1,6 +1,17 @@
 import Field from "./model/Field";
-import { processCron } from "./parser/cronParser";
+import { parseCron } from "./parser/cronParser";
 import { writeToConsole } from "./writer/consoleWriter";
+
+
+/* 
+
+execution flow:
+    index.ts
+        - cronParser
+           - exprParser
+                - fieldParser
+        - writer
+*/
 
 (function () {
     const args = process.argv;
@@ -12,6 +23,6 @@ import { writeToConsole } from "./writer/consoleWriter";
     const cronExpression = input.slice(0, lastSpaceIndex).trim();
     const command = input.slice(lastSpaceIndex + 1).trim();
 
-    const parsedFields = processCron(cronExpression);
+    const parsedFields = parseCron(cronExpression);
     writeToConsole(parsedFields, command);
 })();

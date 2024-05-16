@@ -57,7 +57,8 @@ function isInRange(field: Field, val: number) {
     return val >= min && val <= max;
 }
 
-
+// maintain repository of all parsers
+// adding a new parser for new pattern is easy, doesn't compell us to change the core logic
 export const getAllParsers = (): Array<{ pattern: RegExp, parserFn: Function }> => {
     const parsers = [{
         pattern: /^\d+$/,
